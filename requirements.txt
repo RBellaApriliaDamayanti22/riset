@@ -56,4 +56,4 @@ urllib3==1.26.13
 validators==0.20.0
 watchdog==2.1.9
 zipp==3.11.0
-mysql-connector-python) (4.21.12)
+mysql-connector-python==4.21.12
