@@ -56,10 +56,18 @@ def check_spell(sentence):
     # kamus = mycursor.fetchall()
     # mycursor.close()
     # Initialize connection.
-    conn = st.connection("spelling_correction",type=SupabaseConnection)
+    # conn = st.connection("spelling_correction",type=SupabaseConnection)
+    st_supabase = st.experimental_connection(
+        name="spelling_correction",
+        type=SupabaseConnection,
+        ttl=None,
+        url="https://vnhstgzurrpktwoavsrq.supabase.co", # not needed if provided as a streamlit secret
+        key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZuaHN0Z3p1cnJwa3R3b2F2c3JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDIyNzQ5NTksImV4cCI6MjAxNzg1MDk1OX0.tnVEfSXiqERs9gVvScp5o2b8ToOrtiZy2v7Jn-mewgU", # not needed if provided as a streamlit secret
+    )
     
     # Perform query.
-    rows = conn.query("data", table="data", ttl="10m").execute()
+    # rows = conn.query("data", table="data", ttl="10m").execute()
+    rows = st_supabase.query("data", table="data", ttl=0).execute()
     
     # kamus = [word[0] for word in kamus]
     kamus = rows.data
