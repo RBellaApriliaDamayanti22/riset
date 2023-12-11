@@ -73,9 +73,7 @@ def check_spell(sentence):
     kamus = rows.data
     tokenize = sentence.split()
 
-    kamus = [kamus[idx] for idx in range(len(kamus))]
-
-    st.write("kamus",kamus[0])
+    kamus = [kamus[idx]["data"] for idx in range(len(kamus))]
 
     result = "Mungkin yang anda maksud: "
     listDis = {}
