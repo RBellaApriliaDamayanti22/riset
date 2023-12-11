@@ -38,6 +38,7 @@ import re
 def remove_tanda_baca(text):
     text = ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",text).split())
     return text
+    
 
 def check_spell(sentence):
     # mydb = mysql.connector.connect(
