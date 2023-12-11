@@ -73,7 +73,7 @@ def check_spell(sentence):
     kamus = rows.data
     tokenize = sentence.split()
 
-    kamus = [word for word in kamus]
+    kamus = [kamus[idx] for idx in range(len(kamus))]
 
     st.write("kamus",kamus)
 
