@@ -1,9 +1,6 @@
 import streamlit as st
 import mysql.connector
 
-
-st.write("Streamlit version:", st.__version__)
-
 def damerau_levenshtein_distance(str1, str2):
     # Matriks untuk menyimpan jarak Damerau-Levenshtein
     d = [[0] * (len(str2) + 1) for _ in range(len(str1) + 1)]
@@ -42,26 +39,22 @@ def remove_tanda_baca(text):
     return text
 
 def check_spell(sentence):
-    # mydb = mysql.connector.connect(
-    #         host="localhost",
-    #         user="root",
-    #         password="",
-    #         # database="skripsi"
-    #         database="koreksi_ejaan",
-    #     )
-
-    # Initialize connection.
-    conn = st.connection('mysql', type='sql')
+    mydb = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="",
+            # database="skripsi"
+            database="koreksi_ejaan",
+        )
 
 
-    # mycursor = mydb.cursor()
+    mycursor = mydb.cursor()
 
-    # mycursor.execute("SELECT Unique_Words FROM kamus_berita_pariwisata")
+    mycursor.execute("SELECT Unique_Words FROM kamus_berita_pariwisata")
 
-    # kamus = mycursor.fetchall()
-    # mycursor.close()
-    df = conn.query("SELECT Unique_Words FROM kamus_berita_pariwisata",TTL=600)
-    kamus = df.itertuples()
+    kamus = mycursor.fetchall()
+    mycursor.close()
+    
     kamus = [word[0] for word in kamus]
     tokenize = sentence.split()
 
