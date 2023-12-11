@@ -57,3 +57,4 @@ validators==0.20.0
 watchdog==2.1.9
 zipp==3.11.0
 mysql-connector-python
+st-supabase-connection
