@@ -76,9 +76,6 @@ def check_spell(sentence):
 
     kamus = [kamus[idx]["data"] for idx in range(len(kamus))]
 
-    st.write("kamus len",len(kamus))
-    st.write("kamus",kamus)
-
     result = "Mungkin yang anda maksud: "
     listDis = {}
     count = 0
