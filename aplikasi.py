@@ -68,7 +68,7 @@ def check_spell(sentence):
     
     # Perform query.
     # rows = conn.query("data", table="data", ttl="10m").execute()
-    rows = st_supabase.query("data", table="data", ttl=0).execute()
+    rows = st_supabase.query("data", table="data", ttl=None).execute()
     
     # kamus = [word[0] for word in kamus]
     kamus = rows.data
