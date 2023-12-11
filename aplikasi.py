@@ -40,21 +40,26 @@ def remove_tanda_baca(text):
     return text
 
 def check_spell(sentence):
-    mydb = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            # database="skripsi"
-            database="koreksi_ejaan",
-        )
+    # mydb = mysql.connector.connect(
+    #         host="localhost",
+    #         user="root",
+    #         password="",
+    #         # database="skripsi"
+    #         database="koreksi_ejaan",
+    #     )
+
+    # Initialize connection.
+    conn = st.connection('mysql', type='sql')
 
 
-    mycursor = mydb.cursor()
+    # mycursor = mydb.cursor()
 
-    mycursor.execute("SELECT Unique_Words FROM kamus_berita_pariwisata")
+    # mycursor.execute("SELECT Unique_Words FROM kamus_berita_pariwisata")
 
-    kamus = mycursor.fetchall()
-    mycursor.close()
+    # kamus = mycursor.fetchall()
+    # mycursor.close()
+    df = conn.query("SELECT Unique_Words FROM kamus_berita_pariwisata",TTL=600)
+    kamus = df.itertuples()
     kamus = [word[0] for word in kamus]
     tokenize = sentence.split()
 
