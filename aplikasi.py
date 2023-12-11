@@ -1,5 +1,6 @@
 import streamlit as st
 import mysql.connector
+from st_supabase_connection import SupabaseConnection
 
 def damerau_levenshtein_distance(str1, str2):
     # Matriks untuk menyimpan jarak Damerau-Levenshtein
@@ -39,23 +40,29 @@ def remove_tanda_baca(text):
     return text
 
 def check_spell(sentence):
-    mydb = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            # database="skripsi"
-            database="koreksi_ejaan",
-        )
+    # mydb = mysql.connector.connect(
+    #         host="localhost",
+    #         user="root",
+    #         password="",
+    #         # database="skripsi"
+    #         database="koreksi_ejaan",
+    #     )
 
 
-    mycursor = mydb.cursor()
+    # mycursor = mydb.cursor()
 
-    mycursor.execute("SELECT Unique_Words FROM kamus_berita_pariwisata")
+    # mycursor.execute("SELECT Unique_Words FROM kamus_berita_pariwisata")
 
-    kamus = mycursor.fetchall()
-    mycursor.close()
+    # kamus = mycursor.fetchall()
+    # mycursor.close()
+    # Initialize connection.
+    conn = st.connection("spelling_correction",type=SupabaseConnection)
     
-    kamus = [word[0] for word in kamus]
+    # Perform query.
+    rows = conn.query("data", table="data", ttl="10m").execute()
+    
+    # kamus = [word[0] for word in kamus]
+    kamus = rows.data
     tokenize = sentence.split()
 
     result = "Mungkin yang anda maksud: "
