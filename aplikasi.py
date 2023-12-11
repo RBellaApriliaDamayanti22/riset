@@ -2,6 +2,8 @@ import streamlit as st
 import mysql.connector
 
 
+st.write("Streamlit version:", st.__version__)
+
 def damerau_levenshtein_distance(str1, str2):
     # Matriks untuk menyimpan jarak Damerau-Levenshtein
     d = [[0] * (len(str2) + 1) for _ in range(len(str1) + 1)]
